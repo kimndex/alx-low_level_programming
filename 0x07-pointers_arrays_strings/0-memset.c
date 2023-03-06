@@ -1,5 +1,5 @@
-#include <main.h>
-/*
+#include "main.h"
+/**
  * main - main function
  * Description: fills memory with a constant byte
  * Return: s
@@ -7,10 +7,15 @@
 
 char *_memset(char *s, char b, unsigned int n);
 {
-	unsigned int i;
-	for (i = 0; i < n; i++)
+	int i;
+
+	i = 0;
+	while (n > 0)
 	{
-		*(s + i) = b;
+		s[i] = b;
+		i++;
+		n--;
 	}
-	return (0);
+
+	return (s);
 }
