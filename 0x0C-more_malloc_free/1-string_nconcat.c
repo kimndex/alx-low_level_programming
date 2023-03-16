@@ -1,29 +1,42 @@
-#include  "main.h"
+#include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
-
 /**
- * *_calloc - Function to allocates memory for an array.
- * @nmemb: Number of the array elements.
- * @size: the size of elements on the Array.
- *
- * Return: void pointer to the allocated memory.
+ *string_nconcat - a function that concatenates two strings.
+ *@s1: destination string .
+ *@s2: string to be concatenated
+ *@n: number of bytes to copied
+ *Return: char pointer to the allocated memory
  */
-
-void *_calloc(unsigned int nmemb, unsigned int size)
+char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int i;
-	char *arr;
-/*if size is NULL*/
-	if (nmemb == 0 || size == 0)
-		return (NULL);
+	char *s;
+	unsigned int i, size1 = 0, size2 = 0;
+/*checking if the 2 strings are empty */
+	if (s1 == NULL)
+		s1 = "";
+	if (s2 == NULL)
+		s2 = "";
 
-	arr = malloc(nmemb * size);
-/* if malloc fails , returns 0 */
-	if (arr == NULL)
-		return (NULL);
-/* setting memory to zero */
-	for (i = 0; i < (nmemb * size); i++)
-		arr[i] = 0;
+/* calculating the length of both strings */
+	while (*(s1 + size1) != '\0')
+		size1++;
+	while (*(s2 + size2) != '\0')
+		size2++;
 
-return (arr);
+	if (size2 >= n)
+		size2 = n;
+/* allocating the needed memory for the 2 strings*/
+	s = malloc(size1 + n + 1);
+	if (s == NULL)
+		return (s);
+/* copying the first string to the allacoted memory */
+	for (i = 0; i < size1; i++)
+		s[i] = s1[i];
+
+	for (i = 0; i < n; i++)
+		s[i + size1] = s2[i];
+
+	s[size1 + i] = '\0';
+	return (s);
 }
