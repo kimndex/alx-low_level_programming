@@ -1,51 +1,29 @@
-#include "main.h"
-#include <stdio.h>
+#include  "main.h"
+#include <stdlib.h>
 
 /**
- * string_nconcat - concatenate 2 strings, only n bytes of s2
- * @s1: string 1
- * @s2: string 2
- * @n: bytes to include of s2
- * Return: NULL if fail, else pointer to malloc memory
+ * *_calloc - Function to allocates memory for an array.
+ * @nmemb: Number of the array elements.
+ * @size: the size of elements on the Array.
+ *
+ * Return: void pointer to the allocated memory.
  */
 
-char *string_nconcat(char *s1, char *s2, unsigned int n)
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	char *p;
-	int strlen1, i, c;
-
-	if (s1 == NULL)
-		s1 = "";
-	if (s2 == NULL)
-		s2 = "";
-
-	strlen1 = (unsigned int)_strlen(s1);
-	p = malloc((strlen1 + n + 1) * sizeof(char));
-	if (p == NULL)
+	unsigned int i;
+	char *arr;
+/*if size is NULL*/
+	if (nmemb == 0 || size == 0)
 		return (NULL);
-	for (i = 0, c = 0; i < (strlen1 + n); i++)
-	{
-		if (i < strlen1)
-			p[i] = s1[i];
-		else
-			p[i] = s2[c++];
-	}
-	p[i] = '\0';
 
-	return (p);
-}
+	arr = malloc(nmemb * size);
+/* if malloc fails , returns 0 */
+	if (arr == NULL)
+		return (NULL);
+/* setting memory to zero */
+	for (i = 0; i < (nmemb * size); i++)
+		arr[i] = 0;
 
-/**
- * _strlen - find length of string
- * @s: string
- * Return: length of string
- */
-
-int _strlen(char *s)
-{
-	int i;
-
-	for (i = 0; s[i] != '\0'; i++)
-		;
-	return (i);
+return (arr);
 }
