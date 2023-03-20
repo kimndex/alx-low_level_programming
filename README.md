@@ -1,1 +1,1 @@
-learning about structures
+learning low level programming
